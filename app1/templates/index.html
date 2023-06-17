@@ -1,0 +1,17 @@
+{% if switches %}
+<ul>
+    {% for single_switch in switches %}
+        <h3>Switch ID: {{ single_switch.id }}</h3>
+        <li>Switch: {{ single_switch.sw }}</li>
+        <li>Terminal 1: {{ single_switch.t1 }}</li>
+        <li>Terminal 2: {{ single_switch.t2 }}</li>
+        <li>Terminal 3: {{ single_switch.t3 }}</li>
+        <li>Terminal 4: {{ single_switch.t4 }}</li>
+        <li>Terminal 5: {{ single_switch.t5 }}</li>
+        <li>Date: {{ single_switch.ts2 }}</li>
+
+        <br>
+    {% endfor %}
+</ul>
+{% else %}
+{% endif %}

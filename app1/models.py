@@ -16,10 +16,11 @@ class Switches(models.Model):
     t5 = models.IntegerField(blank=True, null=True)
     ts = models.CharField(max_length=255, blank=True, null=True)
     ts2 = models.DateField(blank=True, null=True)
+    status = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         # managed = False
         db_table = 'switches'
         
-    def __str__(self):
-        return self.sw
+    # def __str__(self):
+    #     return self.sw
