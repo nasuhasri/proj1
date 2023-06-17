@@ -40,4 +40,17 @@ def auto_update_status(request):
 def alert_page(request):
     switches = Switches.objects.all()
     
-    return render(request, "alert.html", {"switches": switches})
+    return render(request, "alert.html", {
+        "switches": switches,
+    })
+    
+def display_graph(request):
+    switch1 = Switches.objects.filter(sw="S1").values()
+    switch2 = Switches.objects.filter(sw="S2").values()
+    switch3 = Switches.objects.filter(sw="S3").values()
+    
+    return render(request, "alert.html", {
+        "switch1": switch1,
+        "switch2": switch2,
+        "switch3": switch3,
+    })
