@@ -15,7 +15,7 @@ class Switches(models.Model):
     t4 = models.IntegerField(blank=True, null=True)
     t5 = models.IntegerField(blank=True, null=True)
     ts = models.CharField(max_length=255, blank=True, null=True)
-    ts2 = models.DateField(blank=True, null=True)
+    ts2 = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:

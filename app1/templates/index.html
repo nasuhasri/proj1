@@ -10,8 +10,61 @@
         <li>Terminal 5: {{ single_switch.t5 }}</li>
         <li>Date: {{ single_switch.ts2 }}</li>
 
+        {% if single_switch.status == null %}
+            {% if single_switch.t1 == single_switch.t2 == single_switch.t3 == single_switch.t4 == single_switch.t5 == 0 %}
+                <button class="status-button" data-switch-id="{{ single_switch.id }}" data-status="0" type="submit">Insert 0</button>
+            {% else %}
+                <button class="status-button" data-switch-id="{{ single_switch.id }}" data-status="1" type="submit">Insert 1</button>
+            {% endif %}
+        {% else %}
+            <p><b>Status: {{ single_switch.status }}</b></p>
+        {% endif %}
+
         <br>
     {% endfor %}
 </ul>
 {% else %}
+    <p>No switches here.</p>
 {% endif %}
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function() {
+        // Add the CSRF token to AJAX requests
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                }
+            }
+        });
+
+        $('.status-button').click(function() {
+            var switchId = $(this).data("switch-id");
+            var status = $(this).data("status");
+    
+            console.log(switchId)
+            console.log(status)
+    
+            // Send AJAX request to update the status
+            $.ajax({
+                url: "/update-switch-status/",
+                type: "POST",
+                data: {
+                    switch_id: switchId,
+                    status: status
+                },
+                success: function () {
+                    // Handle success response if needed
+                    location.reload()
+                    console.log("Status updated successfully!");
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response if needed
+                    console.log("Error updating status: " + error);
+                }
+            });
+        })
+    })
+</script>
