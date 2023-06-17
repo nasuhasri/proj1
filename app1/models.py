@@ -7,7 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
 class Switches(models.Model):
     sw = models.CharField(max_length=255, blank=True, null=True)
     t1 = models.IntegerField(blank=True, null=True)
@@ -21,3 +20,6 @@ class Switches(models.Model):
     class Meta:
         # managed = False
         db_table = 'switches'
+        
+    def __str__(self):
+        return self.sw
