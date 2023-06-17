@@ -1,0 +1,19 @@
+<h2>Alert Page</h2>
+
+<table>
+    <tr>
+        <th>No</th>
+        <th>Switch</th>
+        <th>Alert Type</th>
+        <th>Alert Date/Time</th>
+        <th>Email Notification Date/Time</th>
+    </tr>
+    {% for single_switch in switches %}
+        <tr>
+            <td>{{ single_switch.id  }}</td>
+            <td>SW-{{ single_switch.sw  }}</td>
+            <td>Ping Lost</td>
+            <td>{{ single_switch.ts2 }}</td>
+        </tr>
+    {% endfor %}
+</table>

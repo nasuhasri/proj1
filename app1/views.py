@@ -10,7 +10,6 @@ def index(request):
     })
     
 def update_switch_status(request):
-    print (request)
     if request.method == 'POST':
         switch_id = request.POST.get('switch_id')
         status = request.POST.get('status')
@@ -24,6 +23,21 @@ def update_switch_status(request):
             return JsonResponse({'success': False, 'error': 'Switch not found'})
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+def auto_update_status(request):
+    switches = Switches.objects.all()
     
+    for switch in switches:
+        if switch.t1 == switch.t2 == switch.t3 == switch.t4 == switch.t5 == 0:
+            status = 0
+        else:
+            status = 1
+        
+        switch_obj = Switches.objects.get(id=switch.id)
+        switch_obj.status = status
+        switch_obj.save()
+     
 def alert_page(request):
-    return render(request, "alert.html", {"test": "test"})
+    switches = Switches.objects.all()
+    
+    return render(request, "alert.html", {"switches": switches})

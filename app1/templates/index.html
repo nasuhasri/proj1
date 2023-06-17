@@ -1,5 +1,7 @@
 {% if switches %}
 <ul>
+    <button class="status-button-all" type="submit">Update All Status</button>
+
     {% for single_switch in switches %}
         <h3>Switch ID: {{ single_switch.id }}</h3>
         <li>Switch: {{ single_switch.sw }}</li>
@@ -65,6 +67,22 @@
                     console.log("Error updating status: " + error);
                 }
             });
+        })
+
+        $('.status-button-all').click(function() {
+            $.ajax({
+                url: "/auto-update-status/",
+                type: "POST",
+                success: function () {
+                    // Handle success response if needed
+                    location.reload()
+                    console.log("Status updated successfully!");
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response if needed
+                    console.log("Error updating status: " + error);
+                }
+            })
         })
     })
 </script>
