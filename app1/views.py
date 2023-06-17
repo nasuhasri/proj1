@@ -49,7 +49,7 @@ def display_graph(request):
     switch2 = Switches.objects.filter(sw="S2").values()
     switch3 = Switches.objects.filter(sw="S3").values()
     
-    return render(request, "alert.html", {
+    return render(request, "graph.html", {
         "switch1": switch1,
         "switch2": switch2,
         "switch3": switch3,
