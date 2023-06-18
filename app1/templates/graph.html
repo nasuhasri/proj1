@@ -1,1 +1,123 @@
 <h2>Graph Page</h2>
+
+<div>
+    <h2>SW-S1 Ping Availability</h2>
+    <canvas id="switch1"></canvas>
+
+    <h2>SW-S2 Ping Availability</h2>
+    <canvas id="switch2"></canvas>
+
+    <h2>SW-S3 Ping Availability</h2>
+    <canvas id="switch3"></canvas>
+</div>
+
+<!-- switch 1 -->
+{{ status1|json_script:"status1-data" }}
+{{ switchTime1|json_script:"time1-data" }}
+
+<!-- switch 2 -->
+{{ status2|json_script:"status2-data" }}
+{{ switchTime2|json_script:"time2-data" }}
+
+<!-- switch 3 -->
+{{ status3|json_script:"status3-data" }}
+{{ switchTime3|json_script:"time3-data" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const graphSwitch1 = document.getElementById('switch1')
+    const graphSwitch2 = document.getElementById('switch2')
+    const graphSwitch3 = document.getElementById('switch3')
+
+    // Retrieve the status data from the JSON script element
+    const status1DataElement = document.getElementById('status1-data');
+    const status1Data = JSON.parse(status1DataElement.textContent);
+
+    const status2DataElement = document.getElementById('status2-data');
+    const status2Data = JSON.parse(status2DataElement.textContent);
+
+    const status3DataElement = document.getElementById('status3-data');
+    const status3Data = JSON.parse(status3DataElement.textContent);
+
+    const switchTime1Element = document.getElementById('time1-data');
+    const switchTime1Data = JSON.parse(switchTime1Element.textContent);
+
+    const switchTime2Element = document.getElementById('time2-data');
+    const switchTime2Data = JSON.parse(switchTime2Element.textContent);
+
+    const switchTime3Element = document.getElementById('time3-data');
+    const switchTime3Data = JSON.parse(switchTime3Element.textContent);
+
+    // graph 1
+    const data = {
+        labels: switchTime1Data,
+        datasets: [{
+            label: 'Time',
+            data: status1Data,
+            borderwidth: 1
+        }]
+    }
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    }
+
+    const myChart1 = new Chart(graphSwitch1, config);
+
+    // graph 2
+    const data2 = {
+        labels: switchTime1Data,
+        datasets: [{
+            label: 'Time',
+            data: status2Data,
+            borderwidth: 2
+        }]
+    }
+
+    const config2 = {
+        type: 'line',
+        data: data2,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    }
+
+    const myChart2 = new Chart(graphSwitch2, config2);
+
+    // graph 3
+    const data3 = {
+        labels: switchTime1Data,
+        datasets: [{
+            label: 'Time',
+            data: status3Data,
+            borderwidth: 3
+        }]
+    }
+
+    const config3 = {
+        type: 'line',
+        data: data3,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    }
+
+    const myChart3 = new Chart(graphSwitch3, config3);
+</script>
